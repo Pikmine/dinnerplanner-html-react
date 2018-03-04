@@ -1,0 +1,4 @@
+.WelcomeScreen {
+  height: 150px;
+  padding-top: calc((100vh - 150px) / 2);
+}
