@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
-import './SelectDish.css';
-import Sidebar from '../Sidebar/Sidebar';
-import Dishes from '../Dishes/Dishes';
+import React, { Component } from "react";
+import "./SelectDish.css";
+import Sidebar from "../Sidebar/Sidebar";
+import Dishes from "../Dishes/Dishes";
 
 class SelectDish extends Component {
   render() {
     return (
       <div className="SelectDish">
-        <h2>This is the Select Dish screen</h2>
-        
-        {/* We pass the model as property to the Sidebar component */}
-        <Sidebar model={this.props.model}/>
-        <Dishes/>
+        <div className="container-fluid">
+          <div className="row justify-content-md-center">
+            <div className="col-3">
+              <Sidebar model={this.props.model} />
+            </div>
+            <div className="col-9">
+              <Dishes />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
