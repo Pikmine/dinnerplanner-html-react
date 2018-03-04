@@ -1,4 +1,13 @@
-.WelcomeScreen {
-  height: 150px;
-  padding-top: calc((100vh - 150px) / 2);
+.WelcomeScreen_Image {
+  background: url("/images/welcomescreen.jpg");
+  background-position: center center;
+  background-size: cover;
+  height: calc(100vh - 116px);
+}
+
+.WelcomeScreen_Button {
+  padding-top: calc((100vh - 38px - 116px) / 1.05);
+  height: 38px;
+  color: white;
+  text-align: center;
 }
