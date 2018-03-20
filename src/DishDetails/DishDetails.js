@@ -64,6 +64,7 @@ class DishDetails extends Component {
             </a>
           </p>
           <button onClick={this.addToMenu.bind(this)}>Add to Menu</button>
+          <button onClick={this.props.backToSearch}>Back to Search</button>
           <br />
           <br />
           <h4>Preparation</h4>
@@ -106,13 +107,7 @@ class DishDetails extends Component {
             Loading more details for <strong>{this.props.dish.title}</strong>
           </div>
         )}
-        {this.state.status === "LOADED" && (
-          <React.Fragment>
-            {this.renderDishDetails()}
-            <br />
-            <button onClick={this.props.backToSearch}>Back to Search</button>
-          </React.Fragment>
-        )}
+        {this.state.status === "LOADED" && this.renderDishDetails()}
       </React.Fragment>
     );
   }
