@@ -56,42 +56,44 @@ class DishDetails extends Component {
           backgroundImage: `url(${image})`,
           backgroundSize: "cover"
         }}>
-        <h1>{title}</h1>
-        <p>
-          <a href={sourceUrl} target="_blank">
-            See description on original website
-          </a>
-        </p>
-        <button onClick={this.addToMenu.bind(this)}>Add to Menu</button>
-        <br />
-        <br />
-        <h4>Preparation</h4>
-        <p>{preparationInstructions}</p>
-        <br />
-        <br />
-        <h4>Ingredients for {this.state.numberOfGuests} people</h4>
-        <table>
-          <tbody>
-            {extendedIngredients.map((ingredient, index) => {
-              return (
-                <tr key={index}>
-                  <th>{ingredient.name}</th>
-                  <td>
-                    {ingredient.amount * this.state.numberOfGuests}{" "}
-                    {ingredient.unit}
-                  </td>
-                </tr>
-              );
-            })}
+        <div className="DishDetailsOverlay">
+          <h1>{title}</h1>
+          <p>
+            <a href={sourceUrl} target="_blank">
+              See description on original website
+            </a>
+          </p>
+          <button onClick={this.addToMenu.bind(this)}>Add to Menu</button>
+          <br />
+          <br />
+          <h4>Preparation</h4>
+          <p>{preparationInstructions}</p>
+          <br />
+          <br />
+          <h4>Ingredients for {this.state.numberOfGuests} people</h4>
+          <table>
+            <tbody>
+              {extendedIngredients.map((ingredient, index) => {
+                return (
+                  <tr key={index}>
+                    <th>{ingredient.name}</th>
+                    <td>
+                      {ingredient.amount * this.state.numberOfGuests}{" "}
+                      {ingredient.unit}
+                    </td>
+                  </tr>
+                );
+              })}
 
-            <tr>
-              <td colSpan={2}>
-                <strong>Total Price Per Serving (SEK):</strong>
-                {pricePerServing}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td colSpan={2}>
+                  <strong>Total Price Per Serving (SEK):</strong>
+                  {pricePerServing}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
@@ -107,6 +109,7 @@ class DishDetails extends Component {
         {this.state.status === "LOADED" && (
           <React.Fragment>
             {this.renderDishDetails()}
+            <br />
             <button onClick={this.props.backToSearch}>Back to Search</button>
           </React.Fragment>
         )}

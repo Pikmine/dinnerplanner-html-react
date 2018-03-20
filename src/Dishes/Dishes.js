@@ -41,13 +41,26 @@ class Dishes extends Component {
     let shouldRenderDishes = dishes => dishes.length > 0;
     let renderDishes = dishes =>
       dishes.map(dish => (
-        <li
-          key={dish.id}
-          onClick={() =>
-            this.setState({ status: "DISH_SELECTED", selectedDish: dish })
-          }>
-          {dish.title}
-        </li>
+        <div key={dish.id} className="col-sm-12 col-md-6 col-lg-3">
+          <div className="card">
+            <img
+              className="card-img-top"
+              src={`https://spoonacular.com/recipeImages/${dish.image}`}
+              style={{ maxWidth: "100px" }}
+              alt={dish.title}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{dish.title}</h5>
+              <a
+                onClick={() =>
+                  this.setState({ status: "DISH_SELECTED", selectedDish: dish })
+                }
+                className="btn btn-primary">
+                More Details
+              </a>
+            </div>
+          </div>
+        </div>
       ));
 
     let { status, dishes, selectedDish } = this.state;
@@ -57,6 +70,7 @@ class Dishes extends Component {
         {status !== "DISH_SELECTED" && (
           <React.Fragment>
             <DishSearch setSearchQuery={this.props.setSearchQuery} />
+            <br />
           </React.Fragment>
         )}
         {status === "INITIAL" && (
@@ -76,7 +90,9 @@ class Dishes extends Component {
             </div>
           )}
         {status === "LOADED" &&
-          shouldRenderDishes(dishes) && <ul>{renderDishes(dishes)}</ul>}
+          shouldRenderDishes(dishes) && (
+            <div className="row">{renderDishes(dishes)}</div>
+          )}
         {status === "DISH_SELECTED" && (
           <DishDetails
             dish={selectedDish}

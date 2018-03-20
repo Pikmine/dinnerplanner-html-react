@@ -3,6 +3,7 @@
   padding: 30px;
 }
 
-.App .DishDetails {
+.App .DishDetails .DishDetailsOverlay {
+  background: rgba(255, 255, 255, 0.5);
   padding: 30px;
 }
