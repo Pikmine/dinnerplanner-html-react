@@ -6,18 +6,11 @@ import { modelInstance } from "./data/DinnerModel";
 import SelectDish from "./SelectDish/SelectDish";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Dinner Planner"
-    };
-  }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">{this.state.title}</h1>
+          <h1 className="App-title">Dinner Planner</h1>
         </header>
 
         {/* We rended diffrent component based on the path */}

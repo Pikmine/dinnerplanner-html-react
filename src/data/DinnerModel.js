@@ -21,7 +21,7 @@ const DinnerModel = () => {
   };
 
   const _notifyObservers = details => {
-    state.observers.map(observer => observer(details));
+    state.observers.forEach(observer => observer(details));
   };
 
   const setNumberOfGuests = num => {
