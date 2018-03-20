@@ -13,7 +13,7 @@ class App extends Component {
           <h1 className="App-title">Dinner Planner</h1>
         </header>
 
-        {/* We rended diffrent component based on the path */}
+        {/* We rendered diffrent component based on the path */}
         <Route exact path="/" component={Welcome} />
         <Route
           path="/search"

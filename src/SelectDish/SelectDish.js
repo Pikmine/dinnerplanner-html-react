@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./SelectDish.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Dishes from "../Dishes/Dishes";
-import DishSearch from "../DishSearch/DishSearch.js";
 
 class SelectDish extends Component {
   state = {
@@ -28,12 +27,10 @@ class SelectDish extends Component {
               <Sidebar model={this.props.model} />
             </div>
             <div className="col-md-9 col-sm-12">
-              {/* Added a new component for search */}
-              <DishSearch setSearchQuery={this.setSearchQuery} />
-
               {/* Send searchQuery to the Dishes component */}
               <Dishes
                 key={`results-${searchQuery}-${searchType}`}
+                setSearchQuery={this.setSearchQuery}
                 searchQuery={searchQuery}
                 searchType={searchType}
               />

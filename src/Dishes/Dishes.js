@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DishDetails from "../DishDetails/DishDetails";
+import DishSearch from "../DishSearch/DishSearch.js";
 import "./Dishes.css";
 // Alternative to passing the moderl as the component property,
 // we can import the model instance directly
@@ -38,12 +40,25 @@ class Dishes extends Component {
   render() {
     let shouldRenderDishes = dishes => dishes.length > 0;
     let renderDishes = dishes =>
-      dishes.map(dish => <li key={dish.id}>{dish.title}</li>);
+      dishes.map(dish => (
+        <li
+          key={dish.id}
+          onClick={() =>
+            this.setState({ status: "DISH_SELECTED", selectedDish: dish })
+          }>
+          {dish.title}
+        </li>
+      ));
 
-    let { status, dishes } = this.state;
+    let { status, dishes, selectedDish } = this.state;
 
     return (
       <div className="Dishes">
+        {status !== "DISH_SELECTED" && (
+          <React.Fragment>
+            <DishSearch setSearchQuery={this.props.setSearchQuery} />
+          </React.Fragment>
+        )}
         {status === "INITIAL" && (
           <div className="alert alert-info" role="alert">
             Loading search results ...
@@ -62,6 +77,12 @@ class Dishes extends Component {
           )}
         {status === "LOADED" &&
           shouldRenderDishes(dishes) && <ul>{renderDishes(dishes)}</ul>}
+        {status === "DISH_SELECTED" && (
+          <DishDetails
+            dish={selectedDish}
+            backToSearch={() => this.setState({ status: "LOADED" })}
+          />
+        )}
       </div>
     );
   }
