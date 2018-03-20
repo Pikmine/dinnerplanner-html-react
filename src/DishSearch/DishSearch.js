@@ -13,9 +13,10 @@ export default class DishSearch extends Component {
     };
   }
 
-  onSearchSubmit = () => {
-    let { searchQuery, searchType } = this.state;
+  onSearchSubmit = event => {
+    event.preventDefault();
 
+    let { searchQuery, searchType } = this.state;
     this.props.setSearchQuery(searchQuery, searchType);
   };
 
@@ -39,18 +40,21 @@ export default class DishSearch extends Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
-          name="q"
-          placeholder="Enter search query"
-          value={this.state.searchQuery}
-          onChange={evt => this.setState({ searchQuery: evt.target.value })}
-        />
-        <select
-          onChange={evt => this.setState({ searchType: evt.target.value })}>
-          {this.renderTypes()}
-        </select>
-        <button onClick={this.onSearchSubmit}>Search</button>
+        <h3>Find a dish</h3>
+        <form onSubmit={this.onSearchSubmit}>
+          <input
+            type="text"
+            name="q"
+            placeholder="Enter search query"
+            value={this.state.searchQuery}
+            onChange={evt => this.setState({ searchQuery: evt.target.value })}
+          />
+          <select
+            onChange={evt => this.setState({ searchType: evt.target.value })}>
+            {this.renderTypes()}
+          </select>
+          <button type="submit">Search</button>
+        </form>
       </div>
     );
   }

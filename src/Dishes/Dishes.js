@@ -36,29 +36,32 @@ class Dishes extends Component {
   };
 
   render() {
-    let dishesList = null;
+    let shouldRenderDishes = dishes => dishes.length > 0;
+    let renderDishes = dishes =>
+      dishes.map(dish => <li key={dish.id}>{dish.title}</li>);
 
-    // depending on the state we either generate
-    // useful message to the user or show the list
-    // of returned dishes
-    switch (this.state.status) {
-      case "INITIAL":
-        dishesList = <em>Loading...</em>;
-        break;
-      case "LOADED":
-        dishesList = this.state.dishes.map(dish => (
-          <li key={dish.id}>{dish.title}</li>
-        ));
-        break;
-      default:
-        dishesList = <b>Failed to load data, please try again</b>;
-        break;
-    }
+    let { status, dishes } = this.state;
 
     return (
       <div className="Dishes">
-        <h3>Dishes</h3>
-        <ul>{dishesList}</ul>
+        {status === "INITIAL" && (
+          <div className="alert alert-info" role="alert">
+            Loading search results ...
+          </div>
+        )}
+        {status === "ERROR" && (
+          <div className="alert alert-danger" role="alert">
+            An unexpected error occurred. Check the console log for details.
+          </div>
+        )}
+        {status === "LOADED" &&
+          !shouldRenderDishes(dishes) && (
+            <div className="alert alert-danger" role="alert">
+              0 search results were found
+            </div>
+          )}
+        {status === "LOADED" &&
+          shouldRenderDishes(dishes) && <ul>{renderDishes(dishes)}</ul>}
       </div>
     );
   }
