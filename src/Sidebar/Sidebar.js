@@ -80,6 +80,13 @@ class Sidebar extends Component {
             </tr>
           </tbody>
         </table>
+        <br />
+        {modelInstance.getFullMenu().length === 0 && (
+          <button disabled="disabled">Confirm Dinner</button>
+        )}
+        {modelInstance.getFullMenu().length > 0 && (
+          <button onClick={this.props.setToSummaryView}>Confirm Dinner</button>
+        )}
       </div>
     );
   }
