@@ -45,7 +45,7 @@ class DinnerAPI {
           return (
             this.dishTypes.find(type => {
               return allDishTypes.includes(type);
-            }) || "main course"
+            }) || defaultDishType
           );
         };
 

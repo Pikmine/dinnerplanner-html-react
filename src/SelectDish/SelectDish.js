@@ -6,16 +6,20 @@ import DishSearch from "../DishSearch/DishSearch.js";
 
 class SelectDish extends Component {
   state = {
-    searchQuery: ""
+    searchQuery: "",
+    searchType: "all"
   };
 
-  setSearchQuery = query => {
+  setSearchQuery = (searchQuery, searchType) => {
     this.setState({
-      searchQuery: query
+      searchQuery,
+      searchType
     });
   };
 
   render() {
+    let { searchQuery, searchType } = this.state;
+
     return (
       <div className="SelectDish">
         <div className="container-fluid">
@@ -25,10 +29,14 @@ class SelectDish extends Component {
             </div>
             <div className="col-9">
               {/* Added a new component for search */}
-              <DishSearch setSearchQuery={this.setSearchQuery} />
+              <DishSearch key={""} setSearchQuery={this.setSearchQuery} />
 
               {/* Send searchQuery to the Dishes component */}
-              <Dishes searchQuery={this.state.searchQuery} />
+              <Dishes
+                key={`results-${searchQuery}-${searchType}`}
+                searchQuery={searchQuery}
+                searchType={searchType}
+              />
             </div>
           </div>
         </div>
