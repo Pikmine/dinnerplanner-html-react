@@ -64,6 +64,13 @@ const DinnerModel = () => {
   // it is removed from the menu and the new one added.
   const addDishToMenu = id => {
     getDish(id).then(selectedDish => {
+      const ids = getFullMenu().map(menuItem => menuItem.id);
+
+      if (ids.includes(id)) {
+        // prevent duplicates
+        return;
+      }
+
       state.menu.push(selectedDish);
       _notifyObservers({ menu: state.menu });
     });
