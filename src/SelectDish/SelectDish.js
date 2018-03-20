@@ -24,12 +24,12 @@ class SelectDish extends Component {
       <div className="SelectDish">
         <div className="container-fluid">
           <div className="row justify-content-md-center">
-            <div className="col-3">
+            <div className="col-md-3 col-sm-12">
               <Sidebar model={this.props.model} />
             </div>
-            <div className="col-9">
+            <div className="col-md-9 col-sm-12">
               {/* Added a new component for search */}
-              <DishSearch key={""} setSearchQuery={this.setSearchQuery} />
+              <DishSearch setSearchQuery={this.setSearchQuery} />
 
               {/* Send searchQuery to the Dishes component */}
               <Dishes
