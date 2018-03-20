@@ -43,7 +43,7 @@ export default class DishSearch extends Component {
         <h3>Find a dish</h3>
         <form onSubmit={this.onSearchSubmit}>
           <input
-            type="text"
+            type="number"
             name="q"
             placeholder="Enter search query"
             value={this.state.searchQuery}

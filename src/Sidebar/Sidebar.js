@@ -12,7 +12,8 @@ class Sidebar extends Component {
 
   // our handler for the input's on change event
   onNumberOfGuestsChanged = e => {
-    let numberOfGuests = +e.target.value;
+    let value = e.target.value;
+    let numberOfGuests = isNaN(+value) ? 0 : +value;
 
     this.props.model.setNumberOfGuests(numberOfGuests);
     this.setState({ numberOfGuests });
