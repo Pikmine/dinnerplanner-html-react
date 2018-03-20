@@ -1,4 +1,4 @@
-import { apiConfig } from "../apiConfig.js";
+import DinnerAPI from "../api/DinnerAPI.js";
 
 //DinnerModel Object factory function
 const DinnerModel = () => {
@@ -83,73 +83,13 @@ const DinnerModel = () => {
   // function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
   // you can use the filter argument to filter out the dish by name or ingredient (use for search)
   // if you don't pass any filter all the dishes will be returned
-  const getAllDishes = (type, filter) => {
-    let options = {
-      headers: {
-        "X-Mashape-Key": apiConfig.apiKey
-      }
-    };
-
-    let queryParams = [`instructionsRequired=true`];
-
-    if (type !== undefined && type !== "all") {
-      queryParams.push(`type=${encodeURIComponent(type)}`);
-    }
-
-    if (filter !== undefined && filter !== "") {
-      queryParams.push(`query=${encodeURIComponent(filter)}`);
-    }
-
-    return fetch(
-      `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?${queryParams.join(
-        "&"
-      )}`,
-      options
-    )
-      .then(res => res.json())
-      .then(({ results }) => {
-        return results;
-      });
+  const getAllDishes = (type, query) => {
+    return new DinnerAPI().search(type, query);
   };
 
   //function that returns a dish of specific ID
   const getDish = id => {
-    let options = {
-      headers: {
-        "X-Mashape-Key": apiConfig.apiKey
-      }
-    };
-
-    let queryParams = [`includeNutrition=true`];
-
-    let recognizedDishTypes = [
-      "appetizer",
-      "mainCourse",
-      "sideDish",
-      "dessert",
-      "salad",
-      "bread",
-      "breakfast",
-      "soup",
-      "beverage",
-      "sauce",
-      "drink"
-    ];
-
-    return fetch(
-      `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}/information?${queryParams.join(
-        "&"
-      )}`,
-      options
-    )
-      .then(res => res.json())
-      .then(result => {
-        result.dishType =
-          result.dishTypes.find(dishType =>
-            recognizedDishTypes.includes(dishType)
-          ) || "main course";
-        return result;
-      });
+    return new DinnerAPI().get(id);
   };
 
   return {
