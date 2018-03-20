@@ -21,7 +21,7 @@ class Dishes extends Component {
     // when data is retrieved we update the state
     // this will cause the component to re-render
     modelInstance
-      .getAllDishes()
+      .getAllDishes("all", this.props.searchQuery)
       .then(results => {
         this.setState({
           status: "LOADED",
